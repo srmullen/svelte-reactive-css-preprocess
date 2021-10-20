@@ -37,11 +37,6 @@ function toCSSVariables(vars) {
   return out;
 }
 
-// $: if (document) {
-//   const r = document.querySelector(':root');
-//   r.style.setProperty('--color', color);
-//   r.style.setProperty('--color2', color2);
-// }
 function createVariableUpdaters(vars) {
   let out = '';
   for (let name of vars.variables) {
@@ -58,7 +53,6 @@ module.exports = function cssUpdatePreprocessor() {
 
   return {
     markup: ({ content, filename }) => {
-      console.log(`--- ${filename} ---`);
       const ast = parse(content);
 
       const scriptVars = [];
@@ -102,9 +96,6 @@ module.exports = function cssUpdatePreprocessor() {
         }
       });
 
-      // console.log(scriptVars);
-      // console.log(styleVars);
-
       // Find variables that are referenced in the css vars and set them in the files object.
       const variables = intersection(scriptVars, styleVars);
       if (variables.length) {
@@ -135,8 +126,6 @@ module.exports = function cssUpdatePreprocessor() {
       // add hash to variables
       let code = content;
     
-      // /var\(\s*--color\s*\)/.exec(css)
-      // const re = new RegExp(`var\(\s*--color\s*\)`);
       for (let name of file.variables) {
         const re = new RegExp(`var\\(\\s*--${name}\\s*\\)`, 'g');
         code = code.replace(re, `var(--${name}-${file.hash})`);
@@ -146,7 +135,6 @@ module.exports = function cssUpdatePreprocessor() {
       let varsDeclaration = `:root {\n${toCSSVariables(files[filename])}}\n`;
 
       code = varsDeclaration + code;
-      console.log(code);
       return {
         code
       };
