@@ -1,4 +1,6 @@
 <script>
+	import Square from './Square.svelte';
+
 	export let name;
 
 	const colors = ['#ff3e00', 'blue', 'green'];
@@ -9,31 +11,23 @@
 
 	$: color2 = colors[(colorIdx + 1) % colors.length];
 
-	function updateColor() {
-		colorIdx++;
-		color = colors[colorIdx % colors.length]
-	}
+	let size = 200;
 
-	// $: if (document) {
-	// 	const r = document.querySelector(':root');
-	// 	r.style.setProperty('--color', color);
-	// 	r.style.setProperty('--color2', color2);
-	// }
+	function update() {
+		colorIdx++;
+		color = colors[colorIdx % colors.length];
+		size = Math.random() * 200 + 100;
+	}
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	<button on:click={updateColor}>Update Color</button>
+	<button on:click={update}>Update Color</button>
+	<Square {size} {color} />
 </main>
 
 <style>
-
-	/* :root {
-		--color: inherit;
-		--color2: inherit;
-	} */
-
 	main {
 		text-align: center;
 		padding: 1em;

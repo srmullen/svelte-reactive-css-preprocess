@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
-    "svelte-css-update-preprocessor": "file:.."
+    "svelte-reactive-css-preprocess": "file:.."
   }
 }

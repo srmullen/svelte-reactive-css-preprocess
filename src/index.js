@@ -20,15 +20,6 @@ function hash(str) {
 	return (hash >>> 0).toString(36);
 }
 
-// https://github.com/matyunya/svelte-image/blob/master/src/main.js
-function insert(content, value, start, end, offset) {
-  return {
-    content:
-      content.substr(0, start + offset) + value + content.substr(end + offset),
-    offset: offset + value.length - (end - start),
-  };
-}
-
 function toCSSVariables(vars) {
   let out = '';
   for (let name of vars.variables) {

@@ -1,15 +1,23 @@
 {
-  "name": "svelte-css-update-preprocessor",
+  "name": "svelte-reactive-css-preprocess",
   "version": "0.0.1",
-  "description": "",
+  "description": "Svelte preprocessor to automatically create and update css variables using svelte's reactivity",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "Sean Mullen",
+  "keywords": [
+    "svelte",
+    "preprocess",
+    "css",
+    "styles"
+  ],
+  "author": "Sean Mullen <sean@srmullen.com>",
   "license": "ISC",
   "dependencies": {
     "svelte": "^3.44.0"
-  }
+  },
+  "files": [
+    "src"
+  ]
 }
