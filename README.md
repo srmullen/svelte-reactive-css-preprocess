@@ -3,17 +3,43 @@ svelte-reactive-css-preprocess
 
 Have you ever wished you could use your svelte variables in your component's styles. Now you can!
 
+### Installation
+
+`npm install --save-dev svelte-reactive-css-preprocess`
+
 ### Usage
 
 In your svelte config
 
 ```javascript
-import cssUpdatePreprocessor from 'svelte-css-update-preprocess';
+import reactiveCSSPreprocessor from 'svelte-reactive-css-preprocess';
 
 svelte({
   preprocess: [
-    cssUpdatePreprocessor()
+    reactiveCSSPreprocessor()
   ]
+})
+```
+
+If you're using [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) you need to run `svelte-reactive-css-preprocess` after all tasks for `svelte-preproccess complete. To do that use ['svelte-sequential-preprocessor'](https://github.com/pchynoweth/svelte-sequential-preprocessor).
+
+`npm install --save-dev svelte-sequential-preprocessor.`
+
+```javascript
+import reactiveCSSPreprocessor from 'svelte-reactive-css-preprocess';
+import sveltePreprocess from 'svelte-preprocess';
+import seqPreprocess from 'svelte-sequential-preprocessor';
+
+svelte({
+  preprocess: seqPreprocess([
+		sveltePreprocess({
+			defaults: {
+				style: "postcss",
+			},
+			postcss: true
+		}),
+		reactiveCSSPreprocess()
+	])
 })
 ```
 
@@ -62,3 +88,8 @@ The preprocessor reads through the variables in each component's script and styl
 ```
 
 In the script tag code is injected that handles updating the scoped css variables using Svelte's reactivity.
+
+Issues
+------
+
+* Typescript doesn't work because of the order in which preprocessors are run. All 'markup' preprocessors run before 'script' and 'style', but was relying on 'markup' to be javascript.

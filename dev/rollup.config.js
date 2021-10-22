@@ -4,7 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
-import cssUpdatePreprocessor from 'svelte-css-update-preprocess';
+import reactiveCSSPreprocess from 'svelte-reactive-css-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -44,7 +44,7 @@ export default {
 				dev: !production
 			},
 			preprocess: [
-				cssUpdatePreprocessor()
+				reactiveCSSPreprocess()
 			]
 		}),
 		// we'll extract any component CSS out into

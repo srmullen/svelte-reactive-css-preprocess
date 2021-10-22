@@ -1,5 +1,8 @@
 const { parse, walk } = require('svelte/compiler');
 
+// The variable name to inject into components to bind to an html element. Used to check that the reactive statement is running client-side.
+const documentBinding = '__reactivecssbinding__';
+
 function intersection(arrA, arrB) {
   let _intersection = [];
   for (let elem of arrB) {
@@ -29,14 +32,18 @@ function toCSSVariables(vars) {
 }
 
 function createVariableUpdaters(vars) {
-  let out = '';
+  let out = `let ${documentBinding};\n`;
   for (let name of vars.variables) {
-    out += `$: if (document) {
+    out += `$: if (${documentBinding}) {
   const r = document.querySelector(':root');
   r.style.setProperty('--${name}-${vars.hash}', ${name});
 }\n`;
   }
   return out;
+}
+
+function createDocumentBinding() {
+  return `<span style="display: none;" bind:this={${documentBinding}}></span>`;
 }
 
 module.exports = function cssUpdatePreprocessor() {
@@ -90,10 +97,17 @@ module.exports = function cssUpdatePreprocessor() {
       // Find variables that are referenced in the css vars and set them in the files object.
       const variables = intersection(scriptVars, styleVars);
       if (variables.length) {
+        // append the document binding tag to the markup
+        const code = content + createDocumentBinding();
+        
         files[filename] = {
           variables,
           hash: hash(filename)
-        }
+        };
+
+        return {
+          code
+        };
       }
     },
     script: ({ content, filename }) => {
