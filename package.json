@@ -1,6 +1,6 @@
 {
   "name": "svelte-reactive-css-preprocess",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Svelte preprocessor to automatically create and update css variables using svelte's reactivity",
   "main": "src/index.js",
   "scripts": {
