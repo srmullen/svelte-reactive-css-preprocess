@@ -1,5 +1,7 @@
 svelte-reactive-css-preprocess
-============================
+==============================
+
+[![npm package](https://img.shields.io/npm/v/svelte-reactive-css-preprocess)](https://www.npmjs.com/package/svelte-reactive-css-preprocess)
 
 Have you ever wished you could use your svelte variables in your component's styles. Now you can!
 
