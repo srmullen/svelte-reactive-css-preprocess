@@ -34,14 +34,14 @@ import seqPreprocess from 'svelte-sequential-preprocessor';
 
 svelte({
   preprocess: seqPreprocess([
-		sveltePreprocess({
-			defaults: {
-				style: "postcss",
-			},
-			postcss: true
-		}),
-		reactiveCSSPreprocess()
-	])
+    sveltePreprocess({
+      defaults: {
+        style: "postcss",
+      },
+      postcss: true
+    }),
+    reactiveCSSPreprocess()
+  ])
 })
 ```
 
