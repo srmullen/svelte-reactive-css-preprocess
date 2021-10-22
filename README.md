@@ -90,8 +90,3 @@ The preprocessor reads through the variables in each component's script and styl
 ```
 
 In the script tag code is injected that handles updating the scoped css variables using Svelte's reactivity.
-
-Issues
-------
-
-* Typescript doesn't work because of the order in which preprocessors are run. All 'markup' preprocessors run before 'script' and 'style', but was relying on 'markup' to be javascript.
